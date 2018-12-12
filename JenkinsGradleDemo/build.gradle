@@ -9,7 +9,6 @@
 // Apply the java-library plugin to add support for Java Library
 apply plugin: 'java-library'
 apply plugin: 'java'
-apply plugin: 'sonar-runner'
 apply plugin: 'jacoco'
 
 // In this section you declare where to find the dependencies of your project
@@ -31,21 +30,4 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 }
 
-jacocoTestReport {
-    reports {
-        xml.enabled false
-        csv.enabled false
-        html.destination "${buildDir}/jacocoHtml"
-    }
-}
-
-sonarRunner{
-
- sonarProperties {
- 
-        property "sonar.projectName", "JenkinsGradleDemo"
-        property "sonar.projectKey", "sei:st:JenkinsGradleDemo"
-        property "sonar.jacoco.reportPath", "${project.buildDir}/jacoco/test.exec"
-    }
-}
 
