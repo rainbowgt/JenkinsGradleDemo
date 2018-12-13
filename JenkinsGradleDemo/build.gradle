@@ -7,9 +7,22 @@
  */
 
 // Apply the java-library plugin to add support for Java Library
+buildscript {
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+  dependencies {
+    classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6.2"
+  }
+}
+
 apply plugin: 'java-library'
 apply plugin: 'java'
 apply plugin: 'jacoco'
+apply plugin: 'org.sonarqube'
+
 
 // In this section you declare where to find the dependencies of your project
 repositories {
@@ -29,5 +42,28 @@ dependencies {
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
 }
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.setDestination file("${buildDir}/reports/jacocoHtml")
+    }
+}
+
+
+sonarqube{
+
+   properties {
+ 
+        property "sonar.host.url", "http://localhost:9000/"
+        property "sonar.jdbc.username", "admin"
+        property "sonar.jdbc.password", "admin"
+        property "sonar.projectName", "JenkinsGradleDemo"
+        property "sonar.projectKey", "sei:st:JenkinsGradleDemo"
+        property "sonar.jacoco.reportPath", "${buildDir}/jacoco/test.exec"
+    }
+}
+
 
 

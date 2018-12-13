@@ -56,5 +56,4 @@ public class JenkinsGradleDemoClassTest {
 		int actualRlt = demo.absSum(op1, op2);		
 		assertEquals(ExpectedRlt,actualRlt);		
 	}
-
 }
